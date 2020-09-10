@@ -37,6 +37,30 @@ class card:
             else: otherRank = other.rank
             return rank > otherRank
             return NotImplemented
+
+    def __eq__(self, other):
+        if isinstance(other, card):
+            if (self.rank == "Jack"):
+                rank = 11
+            elif (self.rank == "Queen"):
+                rank = 12
+            elif (self.rank == "King"):
+                rank = 13
+            elif (self.rank =="Ace"):
+                rank = 1
+            else: rank = self.rank
+
+            if (other.rank == "Jack"):
+                otherRank = 11
+            elif (other.rank == "Queen"):
+                otherRank = 12
+            elif (other.rank == "King"):
+                otherRank = 13
+            elif (other.rank =="Ace"):
+                otherRank = 1
+            else: otherRank = other.rank
+            return self.rank == other.rank
+
     def __str__(self):
         return "rank: " + str(self.rank) + " suit: " + self.suit
 
@@ -81,11 +105,17 @@ class game:
 
                     if a_warcard > b_warcard:
                         print("a wins the war")
-                        a_stash.append(a_warcard, b_warcard)
+                        a_stash.append(a_warcard)
+                        a_stash.append(b_warcard)
+                        a_stash.append(a_card)
+                        a_stash.append(b_card)
                         a_cards = a_stash + b_stash + a_cards
                     else:
                         print("b wins the war")
-                        b_stash.append(a_warcard, b_warcard)
+                        b_stash.append(a_warcard)
+                        b_stash.append(b_warcard)
+                        b_stash.append(a_card)
+                        b_stash.append(b_card)
                         b_cards = b_stash + a_stash + b_cards
 
 
