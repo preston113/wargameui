@@ -79,6 +79,8 @@ class game:
         #print(f"Rank is {card.rank} suit is {card.suit}")
         if len(a_cards) or len(b_cards) != 0:
             while len(a_cards) and len(b_cards) > 0:
+                print("player a has " + str(len(a_cards)) + " in their deck")
+                print("player b has " + str(len(b_cards)) + " in their deck")
                 a_card = a_cards.pop()
                 print("player a's card is:")
                 print(a_card)
@@ -91,18 +93,30 @@ class game:
                     a_stash.append(b_card) 
                     a_cards = a_stash + a_cards
                     a_stash.clear()
+
                 
                 elif a_card == b_card:
+                    print("its a war")
+                    if len(a_cards) < 5:
+                        print("b wins the game")
+                        break 
+                    if len(b_cards) < 5:
+                        print("a wins the game")
+                        break 
                     a_stash.append(a_cards.pop())
                     a_stash.append(a_cards.pop())
                     a_stash.append(a_cards.pop())
                     a_warcard = a_cards.pop()
+                    
 
                     b_stash.append(b_cards.pop())
                     b_stash.append(b_cards.pop())
                     b_stash.append(b_cards.pop())
                     b_warcard = b_cards.pop()
-
+                    print("a/'s warcard is ")
+                    print(a_warcard)
+                    print("b/'s warcard is ")
+                    print(b_warcard)
                     if a_warcard > b_warcard:
                         print("a wins the war")
                         a_stash.append(a_warcard)
@@ -110,6 +124,8 @@ class game:
                         a_stash.append(a_card)
                         a_stash.append(b_card)
                         a_cards = a_stash + b_stash + a_cards
+                        a_stash.clear()
+                        b_stash.clear()
                     else:
                         print("b wins the war")
                         b_stash.append(a_warcard)
@@ -117,6 +133,9 @@ class game:
                         b_stash.append(a_card)
                         b_stash.append(b_card)
                         b_cards = b_stash + a_stash + b_cards
+                        b_stash.clear()
+                        a_stash.clear()
+
 
 
                 else:
@@ -126,10 +145,10 @@ class game:
                     b_cards = b_stash + b_cards
                     b_stash.clear()
         elif len(a_cards) == 0:
-            print("b wins")
+            print("b wins the game")
             
         else:
-            print("a wins")
+            print("a wins the game")
             
             
 class deck:
