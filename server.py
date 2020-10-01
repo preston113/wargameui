@@ -27,11 +27,25 @@ class Employees(Resource):
 class get_deck(Resource):
     def get(self):
         print('creating deck...' )
-        result = deck().getDeck()
-        json_string = json.dumps(deck.toJSON(self))
+        deck1 = deck().getDeck()
+        game1 = game()
+        winner = game1.play_war(deck1)
+        json_string = json.dumps(winner)
+        return json_string
+        
+class play_round(Resource):
+    def get(self):
+        print(f"playing round number {round}")
+        deck2 = deck().getDeck()
+        game1 = game()
+        a_cards = deck2[:len(deck2)//2]
+        b_cards = deck2[len(deck2)//2:]
+        winner = game1.play_round(a_cards, b_cards)
+        json_string = json.dumps(winner)
         return json_string
 
 api.add_resource(get_deck, '/get_deck') # Route_1
+api.add_resource(play_round, '/play_round') # Route_1
 #api.add_resource(Employees_Name, '/employees/<employee_id>') # Route_3
 
 
